@@ -14,6 +14,45 @@ public class RoleDao {
 	private static String dbUser = "connectuser";
 	private static String dbpasswd = "connect123!@#";
 
+	public int addRole(Role role) {
+		int insertCount = 0;
+		Connection conn = null;
+		PreparedStatement ps = null;
+		
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			conn = DriverManager.getConnection(dburl, dbUser, dbpasswd);
+			String sql = "INSERT INTO role (role_id, description) VALUES( ?, ? )";
+			ps = conn.prepareStatement(sql);
+			
+			ps.setInt(1,  role.getRoleId());
+			ps.setNString(2, role.getDescription());
+			
+			// INSERT, UPDATE, DELETE
+			insertCount = ps.executeUpdate();
+			
+		}catch(Exception ex) {
+			ex.printStackTrace();
+		}finally {
+			if (ps != null) {
+				try {
+					ps.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return insertCount;
+		
+	}
+	
 	public Role getRole(Integer roleId) {
 		Role role = null;
 		Connection conn = null;
