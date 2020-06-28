@@ -5,6 +5,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import kr.or.connect.jdbcexam.dto.Role;
 
@@ -112,4 +114,32 @@ public class RoleDao {
 		return role;
 	}
 	
+	public List<Role> getRoles(){
+		List<Role> list = new ArrayList<>();
+		
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+		}catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		
+		String sql = "SELECT role_id, description FROM role ORDER BY role_id desc";
+		try (Connection conn = DriverManager.getConnection(dburl, dbUser, dbpasswd);
+			PreparedStatement ps = conn.prepareStatement(sql)) {
+				try (ResultSet rs = ps.executeQuery()){
+					while (rs.next()) {
+						int Id = rs.getInt("role_id");
+						String description = rs.getString(2);
+						Role role = new Role(Id, description);
+						list.add(role);
+					}
+					
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return list;
+	}
 }
