@@ -51,8 +51,27 @@ public class RoleDao {
 				}
 			}
 		}
-		return insertCount;
+		return insertCount;	
+	}
+	
+	public int deleteRole(Integer roleId) {
+		int deleteCount = 0;
 		
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		
+		String sql = "DELETE FROM role WHERE role_id = ?";
+		try (Connection conn = DriverManager.getConnection(dburl, dbUser, dbpasswd);
+				PreparedStatement ps = conn.prepareStatement(sql)){
+			ps.setInt(1, roleId);
+			deleteCount = ps.executeUpdate();
+		} catch(Exception ex) {
+			ex.printStackTrace();
+		}
+		return deleteCount;
 	}
 	
 	public Role getRole(Integer roleId) {
@@ -113,6 +132,11 @@ public class RoleDao {
 
 		return role;
 	}
+	
+	/* try-with-resources문
+	 * try (AutoCloseable) {} catch {}
+	 * 초기화식에서 생성된 객체들은 구문이 끝나는 시점에 close 자동 호출
+	 */
 	
 	public List<Role> getRoles(){
 		List<Role> list = new ArrayList<>();
