@@ -24,4 +24,5 @@ java.util.Date utilDate = rs.getTimestamp(4);
 ps.setTimestamp(4, new Timestamp(businessCard.getCreateDate().getTime()));
 ```
 결과 : BusinessCard{name='홍길동', phone='010-0000-0001', companyName='커넥트', createDate=2020-07-17 14:46:52.0}
+
 시분초까지 제대로 표시되는 것을 확인할 수 있다.
