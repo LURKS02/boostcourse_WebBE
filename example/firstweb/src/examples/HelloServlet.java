@@ -45,6 +45,8 @@ public class HelloServlet extends HttpServlet {
 		 * 클라이언트가 그 결과를 받아 출력
 		 * 
 		 */
+		
+		//test
 	}
 
 }
