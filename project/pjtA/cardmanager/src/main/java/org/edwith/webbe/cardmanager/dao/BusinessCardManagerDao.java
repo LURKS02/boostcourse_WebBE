@@ -3,6 +3,7 @@ package org.edwith.webbe.cardmanager.dao;
 import org.edwith.webbe.cardmanager.dto.BusinessCard;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -32,6 +33,7 @@ public class BusinessCardManagerDao {
     				String name = rs.getString(1);
     				String phone = rs.getString(2);
     				String company = rs.getString(3);
+    				//java.util.Date utilDate = new java.util.Date(rs.getDate(4).getTime());
     				java.util.Date utilDate = rs.getTimestamp(4);
     				BusinessCard card = new BusinessCard(name, phone, company);
     				card.setCreateDate(utilDate);
@@ -60,6 +62,7 @@ public class BusinessCardManagerDao {
     		ps.setString(1, businessCard.getName());
     		ps.setString(2, businessCard.getPhone());
     		ps.setString(3, businessCard.getCompanyName());
+    		//ps.setDate(4, new java.sql.Date(businessCard.getCreateDate().getTime()));
     		ps.setTimestamp(4, new Timestamp(businessCard.getCreateDate().getTime()));
     		
     		ps.executeUpdate();
