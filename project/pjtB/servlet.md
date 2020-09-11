@@ -12,6 +12,7 @@
 * request.setCharacterEncoding("UTF-8")
 
 폼 태그에서 입력한 값을 전송할 때, POST방식으로 보내는 값이 한글일경우 깨지지 않게 하는 것
+
 GET방식으로 보내진 한글들은 톰캣에 기본적으로 적용된 UTF-8이 자동으로 한글 처리를 해줌
 
 * response.setContentType("text/html; charset=utf-8")
