@@ -1,5 +1,8 @@
 package org.edwith.webbe.calculatorcli;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class CalculatorService {
 
 	public int plus(int value1, int value2) {
