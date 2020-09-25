@@ -23,6 +23,8 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
+// DispatcherServlet 이 읽어들이게 될 설정
+
 @Configuration
 @EnableWebMvc
 @EnableSwagger2
@@ -82,9 +84,9 @@ public class WebMvcContextConfiguration extends WebMvcConfigurerAdapter{
 	 * API Info
 	 */
 	private ApiInfo apiInfo() {
-		Contact contact = new Contact("강경미", "https://www.edwith.org", "carami@edwith.org");
+		Contact contact = new Contact("LURKS", "https://www.edwith.org", "carami@edwith.org");
 		ApiInfo apiInfo =
-			new ApiInfo("Swagger Sample", "APIs Sample", "Sample Doc 0.1v", "", contact, "This sentence will be display.", "/");
+			new ApiInfo("Reservation Project", "Reservation Test", "Sample Doc 0.1v", "", contact, "This sentence will be display.", "/");
 		return apiInfo;
 	}
 	
