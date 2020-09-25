@@ -4,3 +4,23 @@
 따라서 불필요한 코드를 만들지 않기 위해 WebMvcConfigurerAdapter 클래스를 사용한다. 
 
 WebMvcConfigurerAdapter 클래스는 WebMvcConfigurer 인터페이스를 상속하며, 모든 메서드의 빈 구현을 미리 만들어놓았다. 따라서 WebMvcConfigurerAdapter 클래스를 extends 해서 필요한 메소드만 오버라이딩 해줄 수 있다.
+
+### application.properties 적용
+ ```java
+@Configuration
+pubic class EnvironmentConfig {
+  @Bean
+  public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigure() {
+    return new PropertySourcesPlaceholderConfigurer();
+  }
+}
+```
+PropertySourcesPlaceholderConfigurer Bean을 추가한 후
+```java
+@PropertySource(value = {"classpath:application.properties"})
+public class configureClass{
+  @Value("${spring.property}")
+  private String value;
+}
+```
+@Value Annotation을 통해 원하는 값을 추출한다.
