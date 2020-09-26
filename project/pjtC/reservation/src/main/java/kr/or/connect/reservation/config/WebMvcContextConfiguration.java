@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Bean;
 
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -88,6 +89,12 @@ public class WebMvcContextConfiguration extends WebMvcConfigurerAdapter{
 		ApiInfo apiInfo =
 			new ApiInfo("Reservation Project", "Reservation Test", "Sample Doc 0.1v", "", contact, "This sentence will be display.", "/");
 		return apiInfo;
+	}
+	
+	//application.properties 값 사용
+	@Bean
+	public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigure() {
+		return new PropertySourcesPlaceholderConfigurer();
 	}
 	
 }
