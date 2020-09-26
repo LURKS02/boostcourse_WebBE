@@ -50,7 +50,7 @@ public class WebMvcContextConfiguration extends WebMvcConfigurerAdapter{
 	@Override
 	public void addViewControllers(final ViewControllerRegistry registry) {
 		System.out.println("addViewControllers가 호출됩니다.");
-		registry.addViewController("/").setViewName("index");
+		registry.addViewController("/").setViewName("main");
 	}
 	
 	// view resolver가 view의 이름을 가지고 어떤 뷰인지 찾게 해줌
