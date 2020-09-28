@@ -27,6 +27,7 @@ public class CategoryServiceImpl implements CategoryService {
 		return list;
 	}
 	
+	@Override
 	public int getCount() {
 		return categoryDao.selectCount();
 	}
