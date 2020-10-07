@@ -15,7 +15,6 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import kr.or.connect.reservation.dto.DisplayInfo;
 import kr.or.connect.reservation.service.DisplayInfoService;
-import kr.or.connect.reservation.service.ProductService;
 
 @RestController
 @RequestMapping("api/displayinfos")
@@ -23,8 +22,6 @@ public class DisplayInfoController {
 
 	@Autowired
 	DisplayInfoService displayInfoService;
-	@Autowired
-	ProductService productService;
 	
 	@ApiOperation(value = "상품 목록 구하기")
 	@ApiResponses({
@@ -32,12 +29,21 @@ public class DisplayInfoController {
 		@ApiResponse(code=500, message="Exception")
 	})
 	@GetMapping
-	public Map<String, Object> items(@RequestParam(value="categoryId", defaultValue="0")int id, @RequestParam(value="start", required=false)int start) {  
+	public Map<String, Object> items(@RequestParam(value="categoryId", required=false, defaultValue="0")int id, 
+			@RequestParam(value="start", required=false, defaultValue="0")int start) {  
 		
 		Map<String, Object> map = new HashMap<>();
-		List<DisplayInfo> displayInfoList = displayInfoService.getAllDisplayInfo();
-		int totalCount = productService.getCountByCategoryId(id);
-		int productCount = displayInfoService.DISPLAY_LIMIT;
+		List<DisplayInfo> displayInfoList;
+		if (id != 0) {
+			displayInfoList = displayInfoService.getDisplayInfoByCategory(id, start);
+		}
+		else {
+			displayInfoList = displayInfoService.getAllDisplayInfo(start);
+		}
+		
+		int totalCount = displayInfoService.getCount(id);
+		int productCount = displayInfoList.size();
+		
 		map.put("products", displayInfoList);
 		map.put("productCount", productCount);
 		map.put("totalCount", totalCount);

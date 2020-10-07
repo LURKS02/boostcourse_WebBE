@@ -17,8 +17,15 @@ public class DisplayInfoServiceImpl implements DisplayInfoService {
 	
 	@Transactional
 	@Override
-	public List<DisplayInfo> getAllDisplayInfo(){
-		List<DisplayInfo> list = displayInfoDao.selectAllDisplayInfo();
+	public List<DisplayInfo> getAllDisplayInfo(Integer start){
+		List<DisplayInfo> list = displayInfoDao.selectAllDisplayInfo(start, DisplayInfoService.DISPLAY_LIMIT);
+		return list;
+	}
+	
+	@Transactional
+	@Override
+	public List<DisplayInfo> getDisplayInfoByCategory(Integer categoryId, Integer start){
+		List<DisplayInfo> list = displayInfoDao.selectDisplayInfoByCategory(categoryId, start, DisplayInfoService.DISPLAY_LIMIT);
 		return list;
 	}
 	
@@ -27,6 +34,11 @@ public class DisplayInfoServiceImpl implements DisplayInfoService {
 	public List<DisplayInfo> getDisplayInfoByProductId(Integer id){
 		List<DisplayInfo> list = displayInfoDao.selectById(id);
 		return list;
+	}
+
+	@Override
+	public int getCount(Integer categoryId) {
+		return displayInfoDao.selectCount(categoryId);
 	}
 	
 }
