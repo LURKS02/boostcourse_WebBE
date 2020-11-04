@@ -1,5 +1,6 @@
 package kr.or.connect.reservation.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,7 +15,9 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import kr.or.connect.reservation.dto.DisplayInfo;
+import kr.or.connect.reservation.dto.ProductImage;
 import kr.or.connect.reservation.service.DisplayInfoService;
+import kr.or.connect.reservation.service.ProductImageService;
 
 @RestController
 @RequestMapping("api/displayinfos")
@@ -22,6 +25,8 @@ public class DisplayInfoController {
 
 	@Autowired
 	DisplayInfoService displayInfoService;
+	@Autowired
+	ProductImageService productImageService;
 	
 	@ApiOperation(value = "상품 목록 구하기")
 	@ApiResponses({
@@ -29,24 +34,41 @@ public class DisplayInfoController {
 		@ApiResponse(code=500, message="Exception")
 	})
 	@GetMapping
-	public Map<String, Object> items(@RequestParam(value="categoryId", required=false, defaultValue="0")int id, 
+	public Map<String, Object> items(@RequestParam(value = "displayInfoId", required=false, defaultValue="0")int displayInfoId, @RequestParam(value="categoryId", required=false, defaultValue="0")int id, 
 			@RequestParam(value="start", required=false, defaultValue="0")int start) {  
 		
 		Map<String, Object> map = new HashMap<>();
-		List<DisplayInfo> displayInfoList;
-		if (id != 0) {
-			displayInfoList = displayInfoService.getDisplayInfoByCategory(id, start);
+		if (displayInfoId != 0) {
+			List<DisplayInfo> displayInfo = displayInfoService.getDisplayInfoByProductId(displayInfoId);
+			List<ProductImage> productImage = productImageService.getAllProductImage(displayInfoId);
+			
 		}
 		else {
-			displayInfoList = displayInfoService.getAllDisplayInfo(start);
+			List<DisplayInfo> displayInfoList;
+			if (id != 0) {
+				displayInfoList = displayInfoService.getDisplayInfoByCategory(id, start);
+			}
+			else {
+				displayInfoList = displayInfoService.getAllDisplayInfo(start);
+			}
+		
+			int totalCount = displayInfoService.getCount(id);
+			int pageCount = totalCount / displayInfoService.DISPLAY_LIMIT;
+			if (totalCount % displayInfoService.DISPLAY_LIMIT > 0)
+				pageCount++;
+		
+			List<Integer> pageStartList = new ArrayList<>();
+			for (int i = 0; i < pageCount; i++) {
+				pageStartList.add(i * displayInfoService.DISPLAY_LIMIT);
+			}
+		
+		
+			int productCount = displayInfoList.size();
+		
+			map.put("products", displayInfoList);
+			map.put("productCount", productCount);
+			map.put("totalCount", totalCount);
 		}
-		
-		int totalCount = displayInfoService.getCount(id);
-		int productCount = displayInfoList.size();
-		
-		map.put("products", displayInfoList);
-		map.put("productCount", productCount);
-		map.put("totalCount", totalCount);
 		return map;
 	}
 	
