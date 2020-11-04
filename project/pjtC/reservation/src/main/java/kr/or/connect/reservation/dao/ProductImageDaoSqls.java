@@ -5,6 +5,6 @@ public class ProductImageDaoSqls {
 			" product_image.file_id AS file_info_id, file_info.file_name, file_info.save_file_name,\r\n" + 
 			" file_info.content_type, file_info.delete_flag, file_info.create_date, file_info.modify_date\r\n" + 
 			" FROM product_image, file_info, display_info\r\n" + 
-			" WHERE display_info.id = 1 and display_info.product_id = product_image.product_id and not product_image.type =\"th\" and product_image.file_id = file_info.id";
+			" WHERE display_info.id = :displayId and display_info.product_id = product_image.product_id and not product_image.type =\"th\" and product_image.file_id = file_info.id";
 	
 }

@@ -1,10 +1,9 @@
 package kr.or.connect.reservation.dto;
 
-public class ProductImage {
-	private int productId;
-	private int productImageId;
-	private String type;
-	private int fileInfoId;
+public class DisplayInfoImage {
+	private int id;
+	private int displayInfoId;
+	private int fileId;
 	private String fileName;
 	private String saveFileName;
 	private String contentType;
@@ -12,29 +11,23 @@ public class ProductImage {
 	private String createDate;
 	private String modifyDate;
 	
-	public int getProductId() {
-		return productId;
+	public int getId() {
+		return id;
 	}
-	public void setProductId(int productId) {
-		this.productId = productId;
+	public void setId(int id) {
+		this.id = id;
 	}
-	public int getProductImageId() {
-		return productImageId;
+	public int getDisplayInfoId() {
+		return displayInfoId;
 	}
-	public void setProductImageId(int productImageId) {
-		this.productImageId = productImageId;
+	public void setDisplayInfoId(int displayInfoId) {
+		this.displayInfoId = displayInfoId;
 	}
-	public String getType() {
-		return type;
+	public int getFileId() {
+		return fileId;
 	}
-	public void setType(String type) {
-		this.type = type;
-	}
-	public int getFileInfoId() {
-		return fileInfoId;
-	}
-	public void setFileInfoId(int fileInfoId) {
-		this.fileInfoId = fileInfoId;
+	public void setFileId(int fileId) {
+		this.fileId = fileId;
 	}
 	public String getFileName() {
 		return fileName;
@@ -75,9 +68,8 @@ public class ProductImage {
 	
 	@Override
 	public String toString() {
-		return "ProductImage [productId=" + productId + ", productImageId=" + productImageId + ", type=" + type
-				+ ", fileInfoId=" + fileInfoId + ", fileName=" + fileName + ", saveFileName=" + saveFileName
-				+ ", contentType=" + contentType + ", deleteFlag=" + deleteFlag + ", createDate=" + createDate
-				+ ", modifyDate=" + modifyDate + "]";
+		return "DisplayInfoImage [id=" + id + ", displayInfoId=" + displayInfoId + ", fileId=" + fileId + ", fileName="
+				+ fileName + ", saveFileName=" + saveFileName + ", contentType=" + contentType + ", deleteFlag="
+				+ deleteFlag + ", createDate=" + createDate + ", modifyDate=" + modifyDate + "]";
 	}
 }

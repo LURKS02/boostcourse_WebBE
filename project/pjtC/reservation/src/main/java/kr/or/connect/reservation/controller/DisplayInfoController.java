@@ -15,7 +15,9 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import kr.or.connect.reservation.dto.DisplayInfo;
+import kr.or.connect.reservation.dto.DisplayInfoImage;
 import kr.or.connect.reservation.dto.ProductImage;
+import kr.or.connect.reservation.service.DisplayInfoImageService;
 import kr.or.connect.reservation.service.DisplayInfoService;
 import kr.or.connect.reservation.service.ProductImageService;
 
@@ -27,6 +29,8 @@ public class DisplayInfoController {
 	DisplayInfoService displayInfoService;
 	@Autowired
 	ProductImageService productImageService;
+	@Autowired
+	DisplayInfoImageService displayInfoImageService;
 	
 	@ApiOperation(value = "상품 목록 구하기")
 	@ApiResponses({
@@ -41,8 +45,13 @@ public class DisplayInfoController {
 		if (displayInfoId != 0) {
 			List<DisplayInfo> displayInfo = displayInfoService.getDisplayInfoByProductId(displayInfoId);
 			List<ProductImage> productImage = productImageService.getAllProductImage(displayInfoId);
+			List<DisplayInfoImage> displayInfoImage = displayInfoImageService.getAllDisplayInfoImage(displayInfoId);
 			
+			map.put("product", displayInfo);
+			map.put("productImages", productImage);
+			map.put("displayInfoImages", displayInfoImage);
 		}
+		
 		else {
 			List<DisplayInfo> displayInfoList;
 			if (id != 0) {
