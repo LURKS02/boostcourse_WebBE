@@ -17,9 +17,11 @@ import io.swagger.annotations.ApiResponses;
 import kr.or.connect.reservation.dto.DisplayInfo;
 import kr.or.connect.reservation.dto.DisplayInfoImage;
 import kr.or.connect.reservation.dto.ProductImage;
+import kr.or.connect.reservation.dto.ProductPrice;
 import kr.or.connect.reservation.service.DisplayInfoImageService;
 import kr.or.connect.reservation.service.DisplayInfoService;
 import kr.or.connect.reservation.service.ProductImageService;
+import kr.or.connect.reservation.service.ProductPriceService;
 
 @RestController
 @RequestMapping("api/displayinfos")
@@ -31,6 +33,8 @@ public class DisplayInfoController {
 	ProductImageService productImageService;
 	@Autowired
 	DisplayInfoImageService displayInfoImageService;
+	@Autowired
+	ProductPriceService productPriceService;
 	
 	@ApiOperation(value = "상품 목록 구하기")
 	@ApiResponses({
@@ -46,10 +50,12 @@ public class DisplayInfoController {
 			List<DisplayInfo> displayInfo = displayInfoService.getDisplayInfoByProductId(displayInfoId);
 			List<ProductImage> productImage = productImageService.getAllProductImage(displayInfoId);
 			List<DisplayInfoImage> displayInfoImage = displayInfoImageService.getAllDisplayInfoImage(displayInfoId);
+			List<ProductPrice> productPrice = productPriceService.getAllProductPrice(displayInfoId);
 			
 			map.put("product", displayInfo);
 			map.put("productImages", productImage);
 			map.put("displayInfoImages", displayInfoImage);
+			map.put("productPrices", productPrice);
 		}
 		
 		else {
