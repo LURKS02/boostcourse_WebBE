@@ -22,6 +22,7 @@ import kr.or.connect.reservation.service.DisplayInfoImageService;
 import kr.or.connect.reservation.service.DisplayInfoService;
 import kr.or.connect.reservation.service.ProductImageService;
 import kr.or.connect.reservation.service.ProductPriceService;
+import kr.or.connect.reservation.service.ReservationUserCommentService;
 
 @RestController
 @RequestMapping("api/displayinfos")
@@ -35,6 +36,8 @@ public class DisplayInfoController {
 	DisplayInfoImageService displayInfoImageService;
 	@Autowired
 	ProductPriceService productPriceService;
+	@Autowired
+	ReservationUserCommentService reservationUserCommentService;
 	
 	@ApiOperation(value = "상품 목록 구하기")
 	@ApiResponses({
@@ -51,10 +54,12 @@ public class DisplayInfoController {
 			List<ProductImage> productImage = productImageService.getAllProductImage(displayInfoId);
 			List<DisplayInfoImage> displayInfoImage = displayInfoImageService.getAllDisplayInfoImage(displayInfoId);
 			List<ProductPrice> productPrice = productPriceService.getAllProductPrice(displayInfoId);
+			int avgScore = reservationUserCommentService.getAverage(displayInfoId);
 			
 			map.put("product", displayInfo);
 			map.put("productImages", productImage);
 			map.put("displayInfoImages", displayInfoImage);
+			map.put("avgScore", avgScore);
 			map.put("productPrices", productPrice);
 		}
 		

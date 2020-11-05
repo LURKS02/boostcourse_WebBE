@@ -13,4 +13,5 @@ public class ReservationUserCommentDaoSqls {
 			"WHERE reservation_user_comment.product_id = :productId and reservation_user_comment.reservation_info_id = reservation_info.id order by id desc limit :start, :limit";
 	public static final String SELECT_COUNT = "select count(*) from reservation_user_comment";
 	public static final String SELECT_COUNT_BY_PRODUCT_ID = "select count(*) from reservation_user_comment where reservation_user_comment.product_id = :productId";
+	public static final String SELECT_AVERAGE = "SELECT avg(score) FROM reservation_user_comment, display_info WHERE display_info.id = :displayId and display_info.product_id = reservation_user_comment.product_id";
 }

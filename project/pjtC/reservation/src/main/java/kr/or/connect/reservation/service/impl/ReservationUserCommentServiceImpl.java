@@ -33,4 +33,9 @@ public class ReservationUserCommentServiceImpl implements ReservationUserComment
 	public int getCount(Integer productId) {
 		return reservationUserCommentDao.selectCount(productId);
 	}
+	
+	@Override
+	public int getAverage(Integer displayId) {
+		return reservationUserCommentDao.getAverage(displayId);
+	}
 }

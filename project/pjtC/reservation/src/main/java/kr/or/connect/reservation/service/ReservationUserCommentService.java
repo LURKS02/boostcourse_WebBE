@@ -9,4 +9,5 @@ public interface ReservationUserCommentService {
 	public List<ReservationUserComment> getAllReservationUserComment(Integer start);
 	public List<ReservationUserComment> getReservationUserCommentByProductId(Integer productId, Integer start);
 	public int getCount(Integer productId);
+	public int getAverage(Integer displayId);
 }

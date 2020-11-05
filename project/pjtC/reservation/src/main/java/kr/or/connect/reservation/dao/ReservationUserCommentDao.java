@@ -1,6 +1,7 @@
 package kr.or.connect.reservation.dao;
 
 import static kr.or.connect.reservation.dao.ReservationUserCommentDaoSqls.SELECT_ALL_RESERVATION_USER_COMMENT;
+import static kr.or.connect.reservation.dao.ReservationUserCommentDaoSqls.SELECT_AVERAGE;
 import static kr.or.connect.reservation.dao.ReservationUserCommentDaoSqls.SELECT_COUNT;
 import static kr.or.connect.reservation.dao.ReservationUserCommentDaoSqls.SELECT_COUNT_BY_PRODUCT_ID;
 import static kr.or.connect.reservation.dao.ReservationUserCommentDaoSqls.SELECT_RESERVATION_USER_COMMENT_BY_PRODUCT_ID;
@@ -54,5 +55,10 @@ public class ReservationUserCommentDao {
 		} catch(EmptyResultDataAccessException e) {
 			return -1;
 		}
+	}
+	
+	public int getAverage(Integer displayId) {
+		Map<String, Integer> params = Collections.singletonMap("displayId", displayId);
+		return jdbc.queryForObject(SELECT_AVERAGE, params, Integer.class);
 	}
 }
