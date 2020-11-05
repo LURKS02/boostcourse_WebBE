@@ -1,6 +1,11 @@
 package kr.or.connect.reservation.dao;
 
-import static kr.or.connect.reservation.dao.DisplayInfoDaoSqls.*;
+import static kr.or.connect.reservation.dao.DisplayInfoDaoSqls.SELECT_ALL_DISPLAYINFO;
+import static kr.or.connect.reservation.dao.DisplayInfoDaoSqls.SELECT_BY_DISPLAYINFO_ID;
+import static kr.or.connect.reservation.dao.DisplayInfoDaoSqls.SELECT_COUNT;
+import static kr.or.connect.reservation.dao.DisplayInfoDaoSqls.SELECT_COUNT_BY_CATEGORY;
+import static kr.or.connect.reservation.dao.DisplayInfoDaoSqls.SELECT_DISPLAYINFO_BY_CATEGORY;
+
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
