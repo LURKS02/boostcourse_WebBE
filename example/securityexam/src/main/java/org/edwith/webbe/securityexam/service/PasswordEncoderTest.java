@@ -23,7 +23,7 @@ public class PasswordEncoderTest {
 	
 	@Test
 	public void passwordTest() throws Exception{
-		String encodePasswd = "$2a$10$veTczkWz.pUle3oMlANhQuf1VQ4qTlAfLmyPAgq0SpsDuv3RNzhLS";
+		String encodePasswd = "$2a$10$yqrziWvwHJRaxJHFVhjhK.Kykz8hOHCZzfyHV2B25YWz8/zz6SW.K";
 		String password = "1234";
 		boolean test = passwordEncoder.matches(password, encodePasswd);
 		System.out.println(test);
